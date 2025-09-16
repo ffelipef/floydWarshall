@@ -1,20 +1,8 @@
 const mapCenter = [-1.4558, -48.4754];
 
-const mapBounds = [
-    [-1.4600, -48.4800],
-    [-1.4500, -48.4700]  
-];
-const southWest = L.latLng(mapBounds[0][0], mapBounds[0][1]);
-const northEast = L.latLng(mapBounds[1][0], mapBounds[1][1]);
-const bounds = L.latLngBounds(southWest, northEast);
+const initialZoom = 15;
 
-const map = L.map('map', {
-    maxBounds: bounds,
-    maxBoundsViscosity: 1.0
-});
-
-map.fitBounds(bounds);
-map.setMinZoom(map.getZoom());
+const map = L.map('map').setView(mapCenter, initialZoom)
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

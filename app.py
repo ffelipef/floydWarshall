@@ -6,8 +6,8 @@ import networkx as nx
 app = Flask(__name__)
 
 print("Iniciando o servidor e carregando o grafo...")
-ponto_central = (-1.4558, -48.4754)
-graph = ox.graph_from_point(ponto_central, dist=1500, network_type='drive')
+ponto_central = (-1.361885, -48.430532)
+graph = ox.graph_from_point(ponto_central, dist=18500, network_type='drive')
 
 print("Grafo pronto!")
 

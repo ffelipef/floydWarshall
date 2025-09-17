@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, jsonify
 import osmnx as ox
-import numpy as np
 import networkx as nx
 
 app = Flask(__name__)

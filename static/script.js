@@ -45,6 +45,7 @@ map.on('click', function(e) {
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
+                
                 //colocando a distância em metros ou km
                 const distanciaMetros = data.distance;
                 let distanciaTexto = "";

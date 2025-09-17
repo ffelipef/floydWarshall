@@ -45,9 +45,20 @@ map.on('click', function(e) {
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
+                //colocando a distância em metros ou km
+                const distanciaMetros = data.distance;
+                let distanciaTexto = "";
+
+                if (distanciaMetros < 1000) {
+                    distanciaTexto = `${Math.round(distanciaMetros)} metros`;
+                } else {
+                    const distanciaKm = distanciaMetros / 1000;
+                    distanciaTexto = `${distanciaKm.toFixed(2)} km`;
+                }
+
                 routeLine = L.polyline(data.route, { color: 'red' }).addTo(map);
                 map.fitBounds(routeLine.getBounds());
-                infoDiv.textContent = 'Rota calculada! Clique em Limpar para recomeçar.';
+                infoDiv.textContent = 'Rota calculada! ' + distanciaTexto + ' de distância Clique em Limpar para recomeçar.';
             } else {
                 infoDiv.textContent = 'Erro: ' + data.message;
             }

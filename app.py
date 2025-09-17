@@ -28,6 +28,8 @@ def reconstruir_caminho_nx(origem, destino):
     """Usa o NetworkX para encontrar o caminho mais curto no grafo já carregado."""
     try:
         path_nodes = nx.shortest_path(graph, source=origem, target=destino, weight='length')
+        '''nx.shortest_path utiliza o algoritmo de Dijkstra por padrão para encontrar o caminho mais curto.
+        Não é viável usar Floyd-Warshall em grafos grandes devido ao alto custo computacional.'''
         route_coords = [[graph.nodes[node]['y'], graph.nodes[node]['x']] for node in path_nodes]
         return route_coords
     except nx.NetworkXNoPath:
@@ -42,11 +44,12 @@ def get_route():
     
     origem_node = ox.nearest_nodes(graph, X=lon_origem, Y=lat_origem)
     destino_node = ox.nearest_nodes(graph, X=lon_destino, Y=lat_destino)
+    distancia = nx.shortest_path_length(graph, source=origem_node, target=destino_node, weight='length')
     
     rota = reconstruir_caminho_nx(origem_node, destino_node)
     
     if rota:
-        return jsonify({'status': 'success', 'route': rota})
+        return jsonify({'status': 'success', 'route': rota, 'distance': distancia})
     else:
         return jsonify({'status': 'error', 'message': 'Rota não encontrada.'})
 
